@@ -11,6 +11,7 @@ export class AppComponent {
   userRegistrado = false;
   nombre: string = '';
   apellido: string = '';
+  cargo: string = '';
   entradas: any;
 
   constructor() {

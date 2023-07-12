@@ -1,24 +1,38 @@
 <h1 style="text-align: center">{{ title }}</h1>
+
+<!-- Formulario -->
 <form>
   <input type="text" name="nombre" [(ngModel)]="nombre" /><br />
 
   <input type="text" name="apellido" [(ngModel)]="apellido" /><br />
+
+  <input type="text" name="cargo" [(ngModel)]="cargo" /><br />
 
   <input type="submit" value="Registrar" (click)="registrarUsuario()" />
 </form>
 
 <br />
 
+<!-- Span si se cumple condicion -->
+<!-- <p *ngIf="userRegistrado; else sinRegistrar">
+  {{ mensaje }} con el nombre de {{ nombre }} {{ apellido }} y tiene el cargo de
+  <span [ngStyle]="{ color: cargo == 'director' ? 'red' : 'black' }">{{
+    cargo
+  }}</span>
+</p> -->
 <p *ngIf="userRegistrado; else sinRegistrar">
-  {{ mensaje }} con el nombre de {{ nombre }} {{ apellido }}
+  {{ mensaje }} con el nombre de {{ nombre }} {{ apellido }} y tiene el cargo de
+  <span [ngClass]="{ paraDirectores: cargo == 'director' }">{{ cargo }}</span>
 </p>
 
+<!-- Span -->
 <ng-template #sinRegistrar>
   <p>No hay usuarios registrados</p>
 </ng-template>
 
 <br /><br />
 
+<!-- Lista -->
 <ul>
   <li *ngFor="let entrada of entradas; let i = index">
     <span style="font-size: larger; font-weight: bold">{{
@@ -28,9 +42,14 @@
   </li>
 </ul>
 
-<!-- Utilizo la diiirectiva ngIf con su correspondiente else.
+<!-- Utilizo la directiva *ngIf con su correspondiente else.
      El ng-template se moostraraa en caso de que sea else.
 
-     En la directiva ngFor definimos una variable entrada para cada elemento que haya en el array entradas en el .ts.
+     En la directiva *ngFor definimos una variable entrada para cada elemento que haya en el array entradas en el .ts.
      Para mostrar esa informacion utilizamos interpolacion y accedemos a la propiedad del objeto que quueremos mostrar.
+
+     Con la directiva [ngStyle] podemos destacar partes de la aplicacion angular en caso de que se cumpla una condicion.
+     Con la directiva [ngClass] podemos agregar un estilo creado en un archivo externo .css, asi podemos especificar con
+     mas detalle las propiedades que llevara el elemento.
+
 -->
